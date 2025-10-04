@@ -248,9 +248,13 @@ const MCQTrivia = () => {
   );
 };
 
+import { useNavigate } from 'react-router-dom';
+
 function Home() {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-floral via-beige to-sage text-brunswick">
+    <div className="min-h-screen pt-16 bg-gradient-to-br from-floral via-beige to-sage text-brunswick">
       {/* Hero Section */}
       <section className="min-h-screen relative overflow-hidden">
         <div className="container mx-auto px-6 py-24 lg:py-32 relative z-10">
@@ -273,8 +277,11 @@ function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <button className="bg-gradient-to-r from-sage to-brunswick text-floral px-8 py-4 rounded-xl font-sans font-semibold hover:from-brunswick hover:to-sage transition-all duration-300 transform hover:scale-105 shadow-md">
-                  Get Started
+                <button 
+                  onClick={() => navigate('/map')}
+                  className="bg-gradient-to-r from-sage to-brunswick text-floral px-8 py-4 rounded-xl font-sans font-semibold hover:from-brunswick hover:to-sage transition-all duration-300 transform hover:scale-105 shadow-md"
+                >
+                  Explore Map
                 </button>
                 <button className="bg-floral text-brunswick px-8 py-4 rounded-xl font-sans font-semibold hover:bg-beige transition-all duration-300 border border-sage/20">
                   Learn More
