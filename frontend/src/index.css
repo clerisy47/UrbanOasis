@@ -1,6 +1,0 @@
-@import "tailwindcss";
-
-/* 🧠 Local preview only — remove before deploying */
-.spline-watermark {
-  display: none !important;
-}
