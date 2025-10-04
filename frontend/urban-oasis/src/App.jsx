@@ -1,9 +1,40 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Check, X, Info } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
 
+// Info Icon Button Component
+const InfoButton = ({ source }) => {
+  const [showInfo, setShowInfo] = useState(false);
+
+  return (
+    <div className="relative inline-block">
+      <button
+        onClick={() => setShowInfo(!showInfo)}
+        className="w-8 h-8 bg-sage/20 hover:bg-sage/40 border border-sage/40 rounded flex items-center justify-center transition-all duration-300"
+      >
+        <Info className="w-4 h-4 text-brunswick" />
+      </button>
+      
+      {showInfo && (
+        <div className="absolute left-12 top-0 z-50 w-64 bg-floral border-2 border-sage/40 rounded-xl p-4 shadow-xl">
+          <div className="flex justify-between items-start mb-2">
+            <h4 className="font-semibold text-brunswick text-sm">Data Source</h4>
+            <button 
+              onClick={() => setShowInfo(false)}
+              className="text-brunswick/60 hover:text-brunswick"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <p className="text-xs text-brunswick/80 leading-relaxed">{source}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Reusable Expandable Panel
-const ExpandablePanel = ({ title, content, icon }) => {
+const ExpandablePanel = ({ title, content, icon, dataSource }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -15,6 +46,7 @@ const ExpandablePanel = ({ title, content, icon }) => {
         <div className="flex items-center gap-4">
           <div className="text-3xl">{icon}</div>
           <h3 className="text-2xl font-serif font-semibold text-brunswick">{title}</h3>
+          <InfoButton source={dataSource} />
         </div>
         {isExpanded ? (
           <ChevronUp className="text-brunswick w-6 h-6" />
@@ -39,124 +71,200 @@ const ExpandablePanel = ({ title, content, icon }) => {
 // Interactive Quiz Component
 const MCQTrivia = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
 
   const questions = [
-    { question: "What is the largest planet in our solar system?", options: ["Earth", "Jupiter", "Saturn", "Mars"], correct: 1 },
-    { question: "Which programming language is known as the 'language of the web'?", options: ["Python", "Java", "JavaScript", "C++"], correct: 2 },
-    { question: "What year did the World Wide Web become publicly available?", options: ["1989", "1991", "1995", "2000"], correct: 1 },
-    { question: "Which element has the chemical symbol 'Au'?", options: ["Silver", "Gold", "Copper", "Aluminum"], correct: 1 },
-    { question: "How many continents are there on Earth?", options: ["5", "6", "7", "8"], correct: 2 }
+    { 
+      question: "What percentage of global greenhouse gas emissions come from cities?", 
+      options: ["25%", "50%", "70%", "90%"], 
+      correct: 2 
+    },
+    { 
+      question: "Which practice best reduces urban heat island effect?", 
+      options: ["More concrete", "Green roofs", "Wider roads", "Taller buildings"], 
+      correct: 1 
+    },
+    { 
+      question: "What is the most sustainable mode of urban transportation?", 
+      options: ["Electric cars", "Buses", "Cycling", "Trains"], 
+      correct: 2 
+    },
+    { 
+      question: "How much water can a single tree absorb per day?", 
+      options: ["10 liters", "50 liters", "100 liters", "500 liters"], 
+      correct: 2 
+    },
+    { 
+      question: "What is the ideal percentage of green space in a sustainable city?", 
+      options: ["5%", "15%", "30%", "50%"], 
+      correct: 2 
+    }
   ];
 
   const handleAnswer = (index) => {
     if (selectedAnswer !== null) return;
     setSelectedAnswer(index);
+    const isCorrect = index === questions[currentQuestion].correct;
+    setAnswers([...answers, isCorrect]);
     setShowResult(true);
-    if (index === questions[currentQuestion].correct) setScore(prev => prev + 1);
-  };
-
-  const nextQuestion = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-      setSelectedAnswer(null);
-      setShowResult(false);
-    } else setGameFinished(true);
+    
+    setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+        setSelectedAnswer(null);
+        setShowResult(false);
+      } else {
+        setGameFinished(true);
+      }
+    }, 1500);
   };
 
   const restartGame = () => {
     setCurrentQuestion(0);
-    setScore(0);
+    setAnswers([]);
     setSelectedAnswer(null);
     setShowResult(false);
     setGameFinished(false);
   };
 
+  const score = answers.filter(Boolean).length;
+
   if (gameFinished) {
     return (
-      <div className="text-center font-sans">
-        <div className="bg-sage/30 backdrop-blur-md rounded-3xl p-12 shadow-lg border border-sage/40">
-          <h3 className="text-3xl font-serif font-semibold text-brunswick mb-4">Quiz Complete 🎉</h3>
-          <p className="text-4xl font-bold text-brunswick mb-2">{score}/{questions.length}</p>
-          <p className="text-lg text-brunswick/80 mb-8">
-            {score === questions.length ? "Perfect Score! 🌟" : 
-             score >= questions.length * 0.7 ? "Great Job! 👏" : 
-             "Keep Practicing! 💪"}
-          </p>
-          <button
-            onClick={restartGame}
-            className="bg-brunswick text-floral px-8 py-3 rounded-xl font-semibold hover:bg-brunswick/90 transition-all duration-300"
-          >
-            Play Again
-          </button>
+      <div className="max-w-4xl mx-auto">
+        {/* Progress Line with Results */}
+        <div className="mb-12 relative">
+          <div className="absolute top-6 left-0 right-0 h-1 bg-gray-300"></div>
+          <div className="relative flex justify-between items-center">
+            {questions.map((_, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div 
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white transition-all duration-500 ${
+                    answers[index] ? 'bg-green-500' : 'bg-red-500'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Celebration Animation */}
+        <div className="text-center font-sans">
+          <div className="bg-sage/30 backdrop-blur-md rounded-3xl p-12 shadow-lg border border-sage/40 animate-pulse">
+            <h3 className="text-3xl font-serif font-semibold text-brunswick mb-4">
+              {score === questions.length ? "🌟 Sustainability Champion! 🌟" : 
+               score >= 3 ? "🌱 Great Eco-Awareness! 🌱" : 
+               "🌍 Keep Learning! 🌍"}
+            </h3>
+            <p className="text-4xl font-bold text-brunswick mb-2">{score}/{questions.length}</p>
+            <p className="text-lg text-brunswick/80 mb-8">
+              {score === questions.length ? "You have excellent knowledge of sustainable urban practices!" : 
+               score >= 3 ? "You're well on your way to becoming a sustainability expert!" : 
+               "Every step towards learning about sustainability matters!"}
+            </p>
+            <button
+              onClick={restartGame}
+              className="bg-brunswick text-floral px-8 py-3 rounded-xl font-semibold hover:bg-brunswick/90 transition-all duration-300"
+            >
+              Try Again
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto font-sans">
-      <div className="bg-floral/40 backdrop-blur-lg rounded-3xl p-8 border border-sage/20 shadow-xl">
-        <div className="flex justify-between items-center mb-6">
-          <span className="text-brunswick/80 font-medium">
-            Question {currentQuestion + 1}/{questions.length}
-          </span>
-          <span className="bg-sage/20 px-4 py-2 rounded-full text-brunswick font-semibold">
-            Score: {score}
-          </span>
-        </div>
-
-        <h3 className="text-2xl font-serif font-semibold text-brunswick mb-8">
-          {questions[currentQuestion].question}
-        </h3>
-
-        <div className="space-y-4 mb-6">
-          {questions[currentQuestion].options.map((option, index) => {
-            const isCorrect = index === questions[currentQuestion].correct;
-            const isSelected = index === selectedAnswer;
-
+    <div className="max-w-4xl mx-auto">
+      {/* Progress Line */}
+      <div className="mb-12 relative">
+        <div className="absolute top-6 left-0 right-0 h-1 bg-gray-300"></div>
+        <div className="relative flex justify-between items-center">
+          {questions.map((_, index) => {
+            const isPast = index < currentQuestion;
+            const isCurrent = index === currentQuestion;
+            
             return (
-              <button
-                key={index}
-                onClick={() => handleAnswer(index)}
-                disabled={selectedAnswer !== null}
-                className={`w-full p-4 rounded-xl text-left font-medium transition-all duration-300 ${
-                  selectedAnswer === null
-                    ? 'bg-beige/10 hover:bg-beige/20 text-brunswick border border-sage/20'
-                    : isSelected
-                    ? isCorrect
-                      ? 'bg-sage text-floral border border-sage/70'
-                      : 'bg-brunswick text-floral border border-brunswick/80'
-                    : isCorrect && showResult
-                    ? 'bg-sage/50 text-brunswick border border-sage/60'
-                    : 'bg-beige/5 text-brunswick/60 border border-sage/20'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span>{option}</span>
-                  {showResult && isSelected && (
-                    isCorrect ? <Check className="w-5 h-5 text-floral" /> : <X className="w-5 h-5 text-floral" />
-                  )}
-                  {showResult && !isSelected && isCorrect && (
-                    <Check className="w-5 h-5 text-sage" />
-                  )}
+              <div key={index} className="flex flex-col items-center">
+                <div 
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all duration-500 z-10 ${
+                    isPast 
+                      ? answers[index] 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-red-500 text-white'
+                      : isCurrent 
+                      ? 'bg-brunswick text-white scale-110' 
+                      : 'bg-gray-300 text-gray-600'
+                  }`}
+                >
+                  {index + 1}
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
+      </div>
 
-        {showResult && (
-          <button
-            onClick={nextQuestion}
-            className="w-full bg-sage text-brunswick py-4 rounded-xl font-semibold text-lg hover:bg-sage/90 transition-all duration-300"
-          >
-            {currentQuestion < questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
-          </button>
-        )}
+      {/* Question Card */}
+      <div className="relative">
+        <div 
+          className="bg-floral/40 backdrop-blur-lg rounded-3xl p-8 border border-sage/20 shadow-xl"
+          style={{
+            transform: `translateX(${currentQuestion * 100 / questions.length}%)`,
+            transition: 'transform 0.5s ease-in-out'
+          }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-brunswick/80 font-medium">
+              Question {currentQuestion + 1}/{questions.length}
+            </span>
+          </div>
+
+          <h3 className="text-2xl font-serif font-semibold text-brunswick mb-8">
+            {questions[currentQuestion].question}
+          </h3>
+
+          <div className="space-y-4">
+            {questions[currentQuestion].options.map((option, index) => {
+              const isCorrect = index === questions[currentQuestion].correct;
+              const isSelected = index === selectedAnswer;
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(index)}
+                  disabled={selectedAnswer !== null}
+                  className={`w-full p-4 rounded-xl text-left font-medium transition-all duration-300 ${
+                    selectedAnswer === null
+                      ? 'bg-beige/10 hover:bg-beige/20 text-brunswick border border-sage/20'
+                      : isSelected
+                      ? isCorrect
+                        ? 'bg-green-500 text-white border border-green-600'
+                        : 'bg-red-500 text-white border border-red-600'
+                      : isCorrect && showResult
+                      ? 'bg-green-500/50 text-brunswick border border-green-500'
+                      : 'bg-beige/5 text-brunswick/60 border border-sage/20'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span>{option}</span>
+                    {showResult && isSelected && (
+                      isCorrect ? <Check className="w-5 h-5 text-white" /> : <X className="w-5 h-5 text-white" />
+                    )}
+                    {showResult && !isSelected && isCorrect && (
+                      <Check className="w-5 h-5 text-brunswick" />
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -222,19 +330,39 @@ export default function App() {
         </div>
 
         <div className="mt-12 space-y-4 max-w-4xl mx-auto">
-          <ExpandablePanel icon="🚀" title="Lightning Fast Performance" content="Experience seamless interactions and instant load times with optimized rendering and efficient architecture." />
-          <ExpandablePanel icon="🎨" title="Beautiful Design System" content="Every pixel is crafted with care, blending modern aesthetics and soft gradients for an elegant experience." />
-          <ExpandablePanel icon="🔒" title="Enterprise-Grade Security" content="We prioritize your privacy with end-to-end encryption, secure authentication, and regular audits." />
-          <ExpandablePanel icon="🌐" title="Global Accessibility" content="Our platform adapts fluidly to every device and meets global accessibility standards." />
+          <ExpandablePanel 
+            icon="🚀" 
+            title="Lightning Fast Performance" 
+            content="Experience seamless interactions and instant load times with optimized rendering and efficient architecture." 
+            dataSource="NASA MODIS satellite data provides real-time monitoring of urban infrastructure performance and environmental conditions."
+          />
+          <ExpandablePanel 
+            icon="🎨" 
+            title="Beautiful Design System" 
+            content="Every pixel is crafted with care, blending modern aesthetics and soft gradients for an elegant experience." 
+            dataSource="Landsat imagery from NASA Earth Observatory helps visualize urban green spaces and aesthetic planning zones."
+          />
+          <ExpandablePanel 
+            icon="🔒" 
+            title="Enterprise-Grade Security" 
+            content="We prioritize your privacy with end-to-end encryption, secure authentication, and regular audits." 
+            dataSource="NASA SEDAC (Socioeconomic Data and Applications Center) provides population density and infrastructure security data."
+          />
+          <ExpandablePanel 
+            icon="🌐" 
+            title="Global Accessibility" 
+            content="Our platform adapts fluidly to every device and meets global accessibility standards." 
+            dataSource="NASA Earthdata provides global coverage for accessibility planning, including terrain analysis and connectivity mapping."
+          />
         </div>
       </section>
 
       {/* Trivia Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-5xl text-center space-y-4">
-          <h2 className="text-5xl font-serif font-bold text-brunswick">Test Your Knowledge</h2>
+          <h2 className="text-5xl font-serif font-bold text-brunswick">How Sustainable Are You?</h2>
           <p className="text-lg font-sans text-brunswick/70">
-            Challenge yourself with our interactive trivia quiz
+            Test your knowledge on sustainable urban planning and environmental practices
           </p>
         </div>
         <div className="mt-12">
