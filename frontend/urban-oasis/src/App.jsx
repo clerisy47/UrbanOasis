@@ -7,19 +7,22 @@ const InfoButton = ({ source }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
-    <div className="relative inline-block">
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setShowInfo(true)}
+      onMouseLeave={() => setShowInfo(false)}
+    >
       <button
-        onClick={() => setShowInfo(!showInfo)}
         className="w-8 h-8 bg-sage/20 hover:bg-sage/40 border border-sage/40 rounded flex items-center justify-center transition-all duration-300"
       >
         <Info className="w-4 h-4 text-brunswick" />
       </button>
-      
+
       {showInfo && (
         <div className="absolute left-12 top-0 z-50 w-64 bg-floral border-2 border-sage/40 rounded-xl p-4 shadow-xl">
           <div className="flex justify-between items-start mb-2">
             <h4 className="font-semibold text-brunswick text-sm">Data Source</h4>
-            <button 
+            <button
               onClick={() => setShowInfo(false)}
               className="text-brunswick/60 hover:text-brunswick"
             >
@@ -38,33 +41,7 @@ const ExpandablePanel = ({ title, content, icon, dataSource }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="w-full bg-floral/30 backdrop-blur-lg rounded-2xl overflow-hidden border border-sage/20 transition-all duration-300 hover:border-sage/40 shadow-sm">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-6 flex items-center justify-between text-left transition-all duration-300 hover:bg-sage/10"
-      >
-        <div className="flex items-center gap-4">
-          <div className="text-3xl">{icon}</div>
-          <h3 className="text-2xl font-serif font-semibold text-brunswick">{title}</h3>
-          <InfoButton source={dataSource} />
-        </div>
-        {isExpanded ? (
-          <ChevronUp className="text-brunswick w-6 h-6" />
-        ) : (
-          <ChevronDown className="text-brunswick w-6 h-6" />
-        )}
-      </button>
-
-      <div
-        className={`transition-all duration-300 ease-in-out ${
-          isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden`}
-      >
-        <div className="p-6 pt-0 text-brunswick/80 font-sans leading-relaxed">
-          {content}
-        </div>
-      </div>
-    </div>
+     <InfoButton source={dataSource} />
   );
 };
 
@@ -143,7 +120,7 @@ const MCQTrivia = () => {
               <div key={index} className="flex flex-col items-center">
                 <div 
                   className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white transition-all duration-500 ${
-                    answers[index] ? 'bg-green-500' : 'bg-red-500'
+                    answers[index] ? 'bg-[#A3B18A]' : 'bg-[#904E55]'
                   }`}
                 >
                   {index + 1}
@@ -153,13 +130,13 @@ const MCQTrivia = () => {
           </div>
         </div>
 
-        {/* Celebration Animation */}
+        {/* Result Section */}
         <div className="text-center font-sans">
           <div className="bg-sage/30 backdrop-blur-md rounded-3xl p-12 shadow-lg border border-sage/40 animate-pulse">
             <h3 className="text-3xl font-serif font-semibold text-brunswick mb-4">
-              {score === questions.length ? "🌟 Sustainability Champion! 🌟" : 
-               score >= 3 ? "🌱 Great Eco-Awareness! 🌱" : 
-               "🌍 Keep Learning! 🌍"}
+              {score === questions.length ? "Sustainability Champion" : 
+               score >= 3 ? "Great Eco-Awareness" : 
+               "Keep Learning"}
             </h3>
             <p className="text-4xl font-bold text-brunswick mb-2">{score}/{questions.length}</p>
             <p className="text-lg text-brunswick/80 mb-8">
@@ -195,8 +172,9 @@ const MCQTrivia = () => {
                   className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all duration-500 z-10 ${
                     isPast 
                       ? answers[index] 
-                        ? 'bg-green-500 text-white' 
-                        : 'bg-red-500 text-white'
+                        ? 'bg-[#A3B18A] text-white' 
+                        : 'bg-[#904E55] text-white'
+
                       : isCurrent 
                       ? 'bg-brunswick text-white scale-110' 
                       : 'bg-gray-300 text-gray-600'
@@ -244,10 +222,10 @@ const MCQTrivia = () => {
                       ? 'bg-beige/10 hover:bg-beige/20 text-brunswick border border-sage/20'
                       : isSelected
                       ? isCorrect
-                        ? 'bg-green-500 text-white border border-green-600'
-                        : 'bg-red-500 text-white border border-red-600'
+                        ? 'bg-[#A3B18A] text-white border border-[#A3B18A]'
+                        : 'bg-[#904E55] text-white border border-[#904E55]'
                       : isCorrect && showResult
-                      ? 'bg-green-500/50 text-brunswick border border-green-500'
+                        ? 'bg-[#A3B18A]/50 text-brunswick border border-[#A3B18A]'
                       : 'bg-beige/5 text-brunswick/60 border border-sage/20'
                   }`}
                 >
@@ -282,7 +260,7 @@ export default function App() {
             {/* Left Content */}
             <div className="space-y-8">
               <span className="bg-beige/20 text-brunswick px-4 py-2 rounded-full text-sm font-sans font-medium border border-sage/20 inline-block">
-                ✨ Welcome to Urban Oasis
+                Welcome to Urban Oasis
               </span>
 
               <h1 className="text-6xl lg:text-7xl font-serif font-bold text-brunswick leading-tight tracking-tight">
@@ -331,25 +309,25 @@ export default function App() {
 
         <div className="mt-12 space-y-4 max-w-4xl mx-auto">
           <ExpandablePanel 
-            icon="🚀" 
+            icon="" 
             title="Lightning Fast Performance" 
             content="Experience seamless interactions and instant load times with optimized rendering and efficient architecture." 
             dataSource="NASA MODIS satellite data provides real-time monitoring of urban infrastructure performance and environmental conditions."
           />
           <ExpandablePanel 
-            icon="🎨" 
+            icon="" 
             title="Beautiful Design System" 
             content="Every pixel is crafted with care, blending modern aesthetics and soft gradients for an elegant experience." 
             dataSource="Landsat imagery from NASA Earth Observatory helps visualize urban green spaces and aesthetic planning zones."
           />
           <ExpandablePanel 
-            icon="🔒" 
+            icon="" 
             title="Enterprise-Grade Security" 
             content="We prioritize your privacy with end-to-end encryption, secure authentication, and regular audits." 
             dataSource="NASA SEDAC (Socioeconomic Data and Applications Center) provides population density and infrastructure security data."
           />
           <ExpandablePanel 
-            icon="🌐" 
+            icon="" 
             title="Global Accessibility" 
             content="Our platform adapts fluidly to every device and meets global accessibility standards." 
             dataSource="NASA Earthdata provides global coverage for accessibility planning, including terrain analysis and connectivity mapping."
@@ -372,7 +350,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-sage/20 bg-floral text-center font-sans">
-        <p className="text-brunswick/90">© 2025 Urban Oasis. Nurtured with calm and code 🌿</p>
+        <p className="text-brunswick/90">© 2025 Urban Oasis. Nurtured with calm and code</p>
       </footer>
     </div>
   );
