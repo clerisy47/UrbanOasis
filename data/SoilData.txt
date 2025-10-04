@@ -1,0 +1,105 @@
+
+===> This is the APO to which the call has to be made to get the data
+https://soil.narc.gov.np/soil/api/soildata?lat={lat}&lon={lon}
+
+
+====. Parameters:
+
+coord
+coord.lon geo location, longitude
+coord.lat geo location, latitude
+parent_soil Parent Soil.
+Ph Ph value of the soil.
+Clay Clay Contents in the soil. Unit Default:percentage
+organic_matter Organic Matter Contents in the soil. Unit Default:percentage
+total_nitrogen Total Nitrogen Contents in the soil. Unit Default:percentage
+boron Boron Contents in the soil. Unit Default:Parts Per Millions
+p2o5 P2o5 Contents in the soil.
+sand sand Contents in the soil.
+zinc zinc Contents in the soil.
+potassium potassium Contents in the soil.
+
+===> Example pf the call:
+
+https://soil.narc.gov.np/soil/api/soildata?lat=28.574&lon=80.807
+
+
+{
+  "coord": {
+    "lon": 80.807,
+    "lat": 28.574,
+    "elevation": 151.68
+  },
+  "ph": "\u003Cspan style='color:#777'\u003E7.68  (Low Alkaline)\u003C/span\u003E",
+  "organic_matter": "\u003Cspan style='color:#777'\u003E1.71 % (Medium)\u003C/span\u003E",
+  "total_nitrogen": "\u003Cspan style='color:#777'\u003E0.08 % (Medium)\u003C/span\u003E",
+  "potassium": "\u003Cspan style='color:#777'\u003E199.38 kg/ha (Medium)\u003C/span\u003E",
+  "p2o5": "\u003Cspan style='color:#777'\u003E39.32 kg/ha (Medium)\u003C/span\u003E",
+  "boron": "\u003Cspan style='color:#777'\u003E0.14 ppm (Low)\u003C/span\u003E",
+  "zinc": "\u003Cspan style='color:#777'\u003E0.43 ppm (Very Low)\u003C/span\u003E",
+  "sand": "29.81 %",
+  "clay": "17.01 %",
+  "slit": "55.48 %",
+  "parentsoil": "Fluvial non calcareous",
+  "province": "Sudurpaschim",
+  "district": "Kailali",
+  "palika": "Kailari Gaunpalika",
+  "fertilizerData": {
+    "Maize": {
+      "OPV": {
+        "MOP": "2.23",
+        "DAP": "4.34",
+        "UREA1": "1.21",
+        "UREA2": "2.9",
+        "UREA3": "2.9",
+        "organic": "10",
+        "zinc": "2",
+        "boron": "1.5"
+      },
+      "Hybrid": {
+        "MOP": "3.34",
+        "DAP": "4.34",
+        "UREA1": "1.93",
+        "UREA2": "3.62",
+        "UREA3": "3.62",
+        "organic": "10",
+        "zinc": "2",
+        "boron": "1.5"
+      }
+    },
+    "Rice": {
+      "OPV": {
+        "MOP": "1.67",
+        "DAP": "2.17",
+        "UREA1": "1.57",
+        "UREA2": "2.42",
+        "UREA3": "2.42",
+        "organic": "6",
+        "zinc": "2",
+        "boron": "1"
+      },
+      "Hybrid": {
+        "MOP": "1.67",
+        "DAP": "2.17",
+        "UREA1": "1.57",
+        "UREA2": "2.42",
+        "UREA3": "2.42",
+        "organic": "6",
+        "zinc": "2",
+        "boron": "1"
+      }
+    },
+    "Wheat": {
+      "OPV": {
+        "MOP": "2.78",
+        "DAP": "3.62",
+        "UREA1": "1.61",
+        "UREA2": "3.02",
+        "UREA3": "3.02",
+        "organic": "6",
+        "zinc": "NA",
+        "boron": "1.5"
+      }
+    }
+  }
+}
