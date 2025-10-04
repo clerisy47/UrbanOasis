@@ -2,13 +2,13 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import urllib.parse
 
 username = urllib.parse.quote_plus("clerisy47")
-password = urllib.parse.quote_plus("12345")
+password = urllib.parse.quote_plus("poop123")
 MONGO_URL = f"mongodb+srv://{username}:{password}@cluster0.egdhzrd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 client = AsyncIOMotorClient(MONGO_URL)
-# db = client.hazards_db
+db = client.UrbanOasis
 
-# hazard_collection = db.hazards
+air_pollution_collection = db.air_pollution
 
 async def shutdown_db_client():
     client.close()
