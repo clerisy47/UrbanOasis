@@ -3,6 +3,7 @@ import Map from './Map.jsx'
 import Sidebar from './Sidebar.jsx'
 
 function App() {
+	console.log("App rendered")
 
 	return (
 		<div id="layout">
