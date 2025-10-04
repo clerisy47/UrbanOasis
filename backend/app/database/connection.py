@@ -8,7 +8,7 @@ MONGO_URL = f"mongodb+srv://{username}:{password}@cluster0.egdhzrd.mongodb.net/?
 client = AsyncIOMotorClient(MONGO_URL)
 db = client.UrbanOasis
 
-air_pollution_collection = db.air_pollution
+parameters_collection = db.parameters
 
 async def shutdown_db_client():
     client.close()
