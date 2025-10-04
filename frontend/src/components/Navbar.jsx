@@ -27,6 +27,14 @@ function Navbar() {
             >
               Map
             </Link>
+            <Link 
+              to="/quiz" 
+              className={`font-sans hover:text-sage transition-colors ${
+                location.pathname === '/quiz' ? 'text-sage' : 'text-floral'
+              }`}
+            >
+              Quiz
+            </Link>
           </div>
         </div>
       </div>
