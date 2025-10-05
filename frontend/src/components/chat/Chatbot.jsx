@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 const GOOGLE_API_KEY = 'AIzaSyDEEX90sCkRapzVxoSajUrwhm2B3Ff9dhQ';
 
-const Chatbot = ({ district }) => {
+const Chatbot = ({ district, onOpenChange }) => {
     const [genAI, setGenAI] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -89,7 +89,11 @@ Question: ${input}
         <>
             {/* Chat Toggle Button */}
             <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => {
+                    const newIsOpen = !isOpen;
+                    setIsOpen(newIsOpen);
+                    onOpenChange?.(newIsOpen);
+                }}
                 className="fixed bottom-4 right-4 w-12 h-12 bg-brunswick text-floral rounded-full shadow-lg flex items-center justify-center hover:bg-brunswick/90 transition-all duration-300"
             >
                 <svg
