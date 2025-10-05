@@ -8,13 +8,13 @@ const maxValue = {
 	"health_facilities": 1,
 	"education_facilities": 1,
 	"education_health": 1,
-	"housing": 2,
+	"housing": 1,
 }
 
 const r = 20;
 const radius = {
-	"air_pollution": r,
-	"health_facilities": r,
+	"air_pollution": 40,
+	"health_facilities": 25,
 	"education_facilities": r,
 	"education_health": r,
 	"housing": r,

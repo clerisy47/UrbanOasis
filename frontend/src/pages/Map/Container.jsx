@@ -25,10 +25,10 @@ function Container({ heatProp, color, zoom, osm, markers, zones, heatmap, }) {
 			"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
 		shadowUrl:
 			"https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-		iconSize: [25, 41],
-		iconAnchor: [12, 41],
-		popupAnchor: [1, -34],
-		shadowSize: [41, 41]
+		iconSize: [12, 19],
+		iconAnchor: [6, 19],
+		popupAnchor: [1, -16],
+		shadowSize: [19, 19]
 	});
 	const blueIcon = new L.Icon({
 		iconUrl:
@@ -53,7 +53,7 @@ function Container({ heatProp, color, zoom, osm, markers, zones, heatmap, }) {
 			})
 			.then((data) => {
 				setHeatData(data);
-				alert("Click on the blue markers to get more info and 'Full Analysis' to visit the location-specific pages")
+				alert("Click on the blue markers to get more info and 'Full Analysis' to visit specific pages")
 			})
 			.catch((error) => console.error("Error loading mock data:", error));
 	}, []);
