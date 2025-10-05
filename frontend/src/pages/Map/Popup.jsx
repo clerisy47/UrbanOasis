@@ -25,14 +25,13 @@ function createPopup(title, contentHTML) {
 			popup.style.left = `${e.clientX - offsetX}px`;
 			popup.style.top = `${e.clientY - offsetY}px`;
 		}
+	};
 	document.onmouseup = () => (isDragging = false);
-
-// -------------------- DISTRICT POPUPS --------------------
+}// -------------------- DISTRICT POPUPS --------------------
 
 // Kathmandu
 function showKathmandu() {
 	const content = `
-    <ul>
       <li><b>Environmental Factors:</b>
         <ul>
           <li>Air Quality: PM₂.₅ ~83 µg/m³ (score ~6/100)</li>
