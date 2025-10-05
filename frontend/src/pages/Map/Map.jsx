@@ -12,7 +12,7 @@ function Map() {
 	let [health, setHealth] = useState(false);
 	let [heatmap, setHeatmap] = useState(true);
 	let [heatmapProp, setHeatmapProp] = useState("air_pollution");
-	let [zones, setZones] = useState(true);
+	let [zones, setZones] = useState(false);
 	// let [pollution, setPollution] = useState(true);
 
 	return (

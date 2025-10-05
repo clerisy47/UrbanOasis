@@ -6,7 +6,7 @@ import districts from "../../assets/districts.json";
 import districtsData from "../../assets/districtData.json";
 import municipalityData from "../../assets/municipalityData.json";
 import { useState, useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { showKailali, showKathmandu, showSindhupalchowk } from './Popup'
 import L from 'leaflet'
 
@@ -52,7 +52,6 @@ function Container({ heatmapProp, zoom, osm, markers, zones, heatmap, health, ed
 
 	const navigate = useNavigate();
 	const center = [28.0, 84.0]
-	const hide = true;
 	const [heatData, setHeatData] = useState([]);
 
 	useEffect(() => {
@@ -102,7 +101,7 @@ function Container({ heatmapProp, zoom, osm, markers, zones, heatmap, health, ed
 	}
 
 	const setStyle = (feature) => {
-		if (hide) {
+		if (!zones) {
 			return { weight: 0.2, fillOpacity: 0, color: "black", maxValue: 100 }
 		}
 		let id = feature.properties[name];
@@ -141,12 +140,63 @@ function Container({ heatmapProp, zoom, osm, markers, zones, heatmap, health, ed
 					/>
 				}
 
-				{markers &&
-					<Marker position={center} icon={redIcon}>
+				{markers && [
+					<Marker position={[28, 84]} icon={redIcon}>
 						<Popup>
-							A pretty CSS3 popup. <br /> Easily customizable.
+							Dumping Site
 						</Popup>
-					</Marker>
+					</Marker>,
+					<Marker position={[27.4, 84.8]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[27.1, 85.8]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[27.5, 85.9]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[28.3, 82.3]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[27.7, 85.3]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[29, 81]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[26.9, 87]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[27.7, 83]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[29, 82.1]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+					<Marker position={[29, 82.1]} icon={redIcon}>
+						<Popup>
+							Dumping Site
+						</Popup>
+					</Marker>,
+				]
 				}
 
 				{/* {health && heatData && heatData.filter(item => item.type === 'air_pollution').map((d) => (

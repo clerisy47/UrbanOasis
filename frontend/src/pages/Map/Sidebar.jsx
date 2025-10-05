@@ -48,7 +48,7 @@ function Sidebar({ setHeatmapProp, zoom, setZoom, markers, setMarkers, zones, se
 									onChange={(e) => setMarkers(e.target.checked)}
 									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
 								/>
-								<span className="text-sm">Markers</span>
+								<span className="text-sm">Dumping Sites</span>
 							</label>
 
 							{/* <label key="education" className="flex items-center space-x-3 text-brunswick">
