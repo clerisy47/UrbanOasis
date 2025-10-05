@@ -8,7 +8,7 @@ import districtsData from "../../assets/districtData.json";
 import municipalityData from "../../assets/municipalityData.json";
 import { useState, useEffect } from 'react'
 
-let showDistricts = 0;
+let showDistricts = 1;
 let data = showDistricts ? districtsData : municipalityData;
 let property = showDistricts ? "temperature" : "2021 Density";
 let name = showDistricts ? "DIST_EN" : "NAME";
@@ -16,10 +16,9 @@ let minValue = data["min"][property];
 let maxValue = data["max"][property];
 
 function Container({ country, zoom, osm, markers, zones, heatmap }) {
-	console.log(country);
-	const center = [51.505, -0.09]
+	const center = [28.0, 84.0]
 
-  const [data, setData] = useState([]);
+  const [heatData, setHeatData] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/parameters/")
@@ -63,7 +62,7 @@ function Container({ country, zoom, osm, markers, zones, heatmap }) {
 				className="h-full"
 				zoom={zoom}
 			>
-				{/* <Controller country={country} zoom={zoom} markers={markers} zones={zones} /> */}
+				<Controller country={country} zoom={zoom} markers={markers} zones={zones} />
 				{osm &&
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -81,7 +80,7 @@ function Container({ country, zoom, osm, markers, zones, heatmap }) {
 					<GeoJSON data={showDistricts ? districts : municipalities} style={setStyle} onEachFeature={setLayer} />
 				}
 				{heatmap &&
-					<Heatmap data={data} />
+					<Heatmap data={heatData} />
 				}
 			</MapContainer>
 
