@@ -5,7 +5,7 @@ import L from "leaflet";
 
 function Heatmap({ data }) {
 
-	console.log(data);
+	// console.log(data);
 	console.log("Heatmap Rendered");
 	const map = useMap();
   useEffect(() => {
