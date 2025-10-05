@@ -16,7 +16,7 @@ function Heatmap({ heatData, heatmapProp }) {
 	const map = useMap();
 	useEffect(() => {
 		const layer = L.heatLayer(data.map(item => [item.latitude, item.longitude, item.value]),
-			{ radius: 25, minOpacity: 0.2, max: maxValue[heatmapProp], gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } }
+			{ radius: 20, minOpacity: 0.2, max: maxValue[heatmapProp], gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } }
 		);
 
 		layer.addTo(map);

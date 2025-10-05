@@ -1,6 +1,6 @@
 import "./Sidebar.css"
 
-function Sidebar({ setHeatmapProp, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap, health, setHealth, education, setEducation }) {
+function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap, health, setHealth, education, setEducation }) {
 
 	return (
 		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full px-6 sticky top-0 sidebar-root">
@@ -101,7 +101,7 @@ function Sidebar({ setHeatmapProp, zoom, setZoom, markers, setMarkers, zones, se
 					<div className="space-y-3">
 						<div>
 							<label className="text-sm text-brunswick/80">Zoom</label>
-							<input onChange={(e) => setZoom(e.target.value)} type="range" min="1" max="20" defaultValue={zoom} className="w-full mt-2" />
+							<input onChange={(e) => setRadius(e.target.value)} type="range" min="1" max="50" defaultValue={radius} className="w-full mt-2" />
 						</div>
 
 						<div>
