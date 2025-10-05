@@ -79,23 +79,6 @@ export function useGeminiRAG() {
     }
   };
 
-  // Set context manually (for testing or fallback)
-  const handleSetContext = (contextText) => {
-    if (contextText.trim()) {
-      setContext(contextText);
-      setContextSet(true);
-      setMessages([
-        {
-          role: 'system',
-          content: `Context loaded successfully! (${contextText.length} characters). You can now ask questions about this content.`,
-        },
-      ]);
-      setError('');
-      return true;
-    }
-    return false;
-  };
-
   // Clear context and reset chat
   const handleClearContext = () => {
     setContext('');
@@ -165,11 +148,9 @@ Instructions:
     fetchingContext,
     
     // Methods
-    setContext,
-    handleSetContext,
     handleClearContext,
     sendMessage,
-    fetchContextFromBackend, // New method to fetch from backend
+    fetchContextFromBackend,
   };
 }
 
@@ -183,8 +164,6 @@ export default function GeminiRAGChatbot() {
     error,
     apiKeySet,
     fetchingContext,
-    setContext,
-    handleSetContext,
     handleClearContext,
     sendMessage,
     fetchContextFromBackend,
@@ -215,42 +194,29 @@ export default function GeminiRAGChatbot() {
       
       {!contextSet && apiKeySet && (
         <div style={{ marginBottom: '20px' }}>
-          <h2>Load Context</h2>
+          <h2>Load Context from Backend</h2>
           
-          {/* Option 1: Fetch from Backend */}
           <div style={{ marginBottom: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '5px' }}>
-            <h3>From Backend</h3>
             <input
               type="text"
               value={backendUrl}
               onChange={(e) => setBackendUrl(e.target.value)}
-              style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
+              style={{ width: '100%', marginBottom: '10px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
               placeholder="Backend URL (e.g., http://localhost:3000/api/context)"
             />
             <button 
               onClick={handleFetchFromBackend} 
               disabled={fetchingContext}
-              style={{ padding: '10px 20px', cursor: 'pointer' }}
+              style={{ 
+                padding: '10px 20px', 
+                cursor: fetchingContext ? 'not-allowed' : 'pointer',
+                backgroundColor: fetchingContext ? '#ccc' : '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px'
+              }}
             >
               {fetchingContext ? 'Fetching...' : 'Fetch Context from Backend'}
-            </button>
-          </div>
-
-          {/* Option 2: Manual Input (for testing) */}
-          <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '5px' }}>
-            <h3>Manual Input (Testing)</h3>
-            <textarea
-              value={context}
-              onChange={(e) => setContext(e.target.value)}
-              rows={10}
-              style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
-              placeholder="Or paste context manually for testing..."
-            />
-            <button 
-              onClick={() => handleSetContext(context)}
-              style={{ padding: '10px 20px', cursor: 'pointer' }}
-            >
-              Load Manual Context
             </button>
           </div>
         </div>
