@@ -1,4 +1,6 @@
 import "./Sidebar.css"
+import { MapPin } from "lucide-react";
+
 
 function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap, health, setHealth, education, setEducation }) {
 
@@ -31,27 +33,30 @@ function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones
 
 					<div className="space-y-3">
 
-							<label key="osm" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={osm}
-									onChange={(e) => setOSM(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">OSM</span>
-							</label>
+						<label key="osm" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={osm}
+								onChange={(e) => setOSM(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">OSM</span>
+						</label>
 
-							<label key="markers" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={markers}
-									onChange={(e) => setMarkers(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Dumping Sites</span>
-							</label>
+						<label key="markers" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={markers}
+								onChange={(e) => setMarkers(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm flex items-center gap-1">
+								<MapPin className="w-4 h-4 text-red-500" />
+								Dumping Sites
+							</span>
+						</label>
 
-							{/* <label key="education" className="flex items-center space-x-3 text-brunswick">
+						{/* <label key="education" className="flex items-center space-x-3 text-brunswick">
 								<input
 									type="checkbox"
 									checked={education}
@@ -71,25 +76,25 @@ function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones
 								<span className="text-sm">Health Facilities</span>
 							</label> */}
 
-							<label key="heatmap" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={heatmap}
-									onChange={(e) => setHeatmap(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Heatmap</span>
-							</label>
+						<label key="heatmap" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={heatmap}
+								onChange={(e) => setHeatmap(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">Heatmap</span>
+						</label>
 
-							<label key="zones" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={zones}
-									onChange={(e) => setZones(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Zones</span>
-							</label>
+						<label key="zones" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={zones}
+								onChange={(e) => setZones(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">Zones</span>
+						</label>
 
 					</div>
 
