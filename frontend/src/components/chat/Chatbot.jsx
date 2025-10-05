@@ -1,7 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
 
+const GOOGLE_API_KEY = 'AIzaSyDsjajmITbYInEsIsE3ene88nH7HfyKEdQ';
+
 const Chatbot = ({ district }) => {
+  const [genAI, setGenAI] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [apiKeySet, setApiKeySet] = useState(false);
+
+  // Load Google Generative AI SDK
+  useEffect(() => {
+    const loadSDK = async () => {
+      try {
+        const { GoogleGenerativeAI } = await import('@google/generative-ai');
+        const ai = new GoogleGenerativeAI(GOOGLE_API_KEY);
+        // Check available models
+        const model = ai.getGenerativeModel({ model: "gemini-pro" });
+        await model.generateContent("test"); // Verify the model works
+        setGenAI(ai);
+        setApiKeySet(true);
+      } catch (err) {
+        console.error('Failed to load Gemini SDK:', err);
+        setError('Failed to load Gemini SDK. Check your API key or internet connection.');
+      }
+    };
+    loadSDK();
+  }, []);
   const welcomeMessages = {
     kathmandu: "Welcome to Kathmandu's sustainability assistant! I can help you understand the urban challenges and opportunities in the capital city. Ask me about air quality, waste management, public transportation, or any other sustainability aspects of Kathmandu.",
     sindhupalchok: "Welcome to Sindhupalchok's sustainability assistant! I can help you understand the rural development challenges and opportunities in this mountainous district. Ask me about landslide risks, agriculture, forest conservation, or any other sustainability aspects of Sindhupalchok.",
@@ -15,22 +40,48 @@ const Chatbot = ({ district }) => {
   const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || !genAI || loading) return;
 
     // Add user message
     const newMessages = [...messages, { text: input, isUser: true }];
     setMessages(newMessages);
     setInput('');
+    setLoading(true);
 
-    // Simulate bot response
-    setTimeout(() => {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      const prompt = `
+You are 'Sustainability Guru', a specialized assistant focusing on sustainability in ${district}, Nepal.
+
+Instructions:
+- Provide accurate information about ${district}'s sustainability challenges and opportunities
+- Be concise and informative
+- Focus on local context and practical solutions
+- If unsure, acknowledge limitations and suggest reliable sources
+
+Question: ${input}
+`;
+
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+
       setMessages([...newMessages, {
-        text: `I'm analyzing your query about ${district}'s development. This feature will be connected to a real AI backend soon!`,
+        text: text,
         isUser: false
       }]);
-    }, 1000);
+    } catch (err) {
+      console.error('Gemini API error:', err);
+      setMessages([...newMessages, {
+        text: "I apologize, but I'm having trouble processing your request at the moment. Please try again later.",
+        isUser: false
+      }]);
+      setError(err.message || 'Failed to get response from AI');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,7 +132,20 @@ const Chatbot = ({ district }) => {
                 </div>
               </div>
             ))}
+            {loading && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-3 rounded-xl bg-sage/10 text-brunswick/50 rounded-tl-none">
+                  Thinking...
+                </div>
+              </div>
+            )}
           </div>
+
+          {error && (
+            <div className="px-4 py-2 bg-red-50 border-t border-red-200">
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          )}
 
           <form onSubmit={handleSend} className="p-4 border-t border-sage/20">
             <div className="flex gap-2">
@@ -91,10 +155,16 @@ const Chatbot = ({ district }) => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={`Ask about ${district}...`}
                 className="flex-1 px-4 py-2 rounded-xl border border-sage/20 focus:outline-none focus:border-brunswick"
+                disabled={!apiKeySet || loading}
               />
               <button 
                 type="submit"
-                className="p-2 bg-brunswick text-floral rounded-xl hover:bg-brunswick/90"
+                className={`p-2 rounded-xl ${
+                  loading || !apiKeySet
+                    ? 'bg-brunswick/50 cursor-not-allowed'
+                    : 'bg-brunswick hover:bg-brunswick/90'
+                } text-floral`}
+                disabled={loading || !apiKeySet}
               >
                 <Send size={20} />
               </button>
