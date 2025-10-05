@@ -26,11 +26,15 @@ function Container({ country, zoom, osm, markers, zones, heatmap }) {
 				console.log("fetching data")
 				return response.json()
 			})
-      .then((response) => setData(response.map(item => [item.latitude, item.longitude, item.value])))
+      .then((response) => setHeatData(response.map(item => [item.latitude, item.longitude, item.value])))
       .catch((error) => console.error(error));
   }, []);
 
 	const setLayer = (feature, layer) => {
+		if (feature.properties[name] == "Kathmandu") {
+			layer.bindPopup("show")
+			return
+		}
 		layer.bindPopup(feature.properties[name]);
 	}
 
