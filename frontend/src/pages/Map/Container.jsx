@@ -34,17 +34,19 @@ function Container({ heatProp, coldProp, zoom, osm, markers, zones, heatmap, }) 
 	const center = [28.0, 84.0]
 	const [heatData, setHeatData] = useState([]);
 
-	// Fetch data from api
-	//
+
 	useEffect(() => {
-		fetch("http://127.0.0.1:8000/api/parameters/")
+		fetch("/data.json")
 			.then((response) => {
-				console.log("fetching data")
-				return response.json()
+				console.log("Fetching mock data...");
+				return response.json();
 			})
-			.then((response) => setHeatData(response))
-			.catch((error) => console.error(error));
+			.then((data) => {
+				setHeatData(data);
+			})
+			.catch((error) => console.error("Error loading mock data:", error));
 	}, []);
+
 
 
 	// Display popup info on clicking districts
@@ -137,11 +139,11 @@ function Container({ heatProp, coldProp, zoom, osm, markers, zones, heatmap, }) 
 				}
 
 				{heatmap &&
-					<Heatmap heatData={heatData} heatmapProp={heatProp} hotorcold="hot"/>
+					<Heatmap heatData={heatData} heatmapProp={heatProp} hotorcold="hot" />
 				}
 
 				{heatmap &&
-					<Heatmap heatData={heatData} heatmapProp={coldProp} hotorcold="cold"/>
+					<Heatmap heatData={heatData} heatmapProp={coldProp} hotorcold="cold" />
 				}
 
 			</MapContainer>
