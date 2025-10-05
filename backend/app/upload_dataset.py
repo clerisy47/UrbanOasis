@@ -3,7 +3,7 @@ import asyncio
 from app.schemas.schemas import ParametersData
 from app.database.connection import parameters_collection, shutdown_db_client
 
-TYPE = "health_facilities"
+TYPE = "education_facilities"
 
 async def load_json():
     with open(f"../data/{TYPE}.json", "r") as f:
