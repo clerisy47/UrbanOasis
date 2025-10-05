@@ -2,12 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Home, Map } from 'lucide-react';
 import Chatbot from '../../components/chat/Chatbot';
+import Alert from '../../components/ui/Alert';
 
 const Kailali = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen pt-20 px-6 bg-gradient-to-br from-floral via-beige to-sage">
+      <Alert />
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-serif font-bold text-brunswick">Kailali District Analysis</h1>
