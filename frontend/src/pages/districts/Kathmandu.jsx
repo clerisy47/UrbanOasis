@@ -9,7 +9,7 @@ const Kathmandu = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <div className="min-h-screen pt-20 px-6 bg-gradient-to-br from-floral via-beige to-sage">
+    <div className="min-h-screen pt-20 pb-32 px-6 bg-gradient-to-br from-floral via-beige to-sage">
       <Alert isChatOpen={isChatOpen} />
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">

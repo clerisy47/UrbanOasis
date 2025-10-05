@@ -114,9 +114,9 @@ Question: ${input}
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-20 right-4 w-96 h-[500px] bg-floral rounded-2xl shadow-xl border border-sage/20 flex flex-col">
+                <div className="fixed bottom-20 right-4 w-80 h-[500px] bg-floral rounded-2xl shadow-xl border border-sage/20 flex flex-col z-50">
                     <div className="bg-brunswick text-floral p-4 rounded-t-2xl flex justify-between items-center">
-                        <h3 className="font-serif font-semibold"> Sustainable Guru</h3>
+                        <h3 className="font-serif font-semibold">Sustainable Guru</h3>
                         <button
                             onClick={() => setIsOpen(false)}
                             className="text-floral/80 hover:text-floral"
