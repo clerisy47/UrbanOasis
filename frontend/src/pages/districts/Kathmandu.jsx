@@ -61,10 +61,10 @@ const Kathmandu = () => {
               <li>• Establish green corridors to reduce urban heat island effect</li>
               <li>• Modernize public transportation with electric buses and improved routes</li>
             </ul>
-          </div>
+                    </div>
         </div>
       </div>
-      <Chatbot />
+      <Chatbot district="Kathmandu" />
     </div>
   );
 };

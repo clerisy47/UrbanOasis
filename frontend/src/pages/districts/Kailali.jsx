@@ -65,7 +65,7 @@ const Kailali = () => {
           </div>
         </div>
       </div>
-      <Chatbot />
+      <Chatbot district="Kailali" />
     </div>
   );
 };

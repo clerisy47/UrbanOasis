@@ -62,10 +62,10 @@ const Sindhupalchok = () => {
               <li>• Develop eco-tourism infrastructure to diversify income sources</li>
               <li>• Strengthen healthcare infrastructure with mobile medical units</li>
             </ul>
-          </div>
+                    </div>
         </div>
       </div>
-      <Chatbot />
+      <Chatbot district="Sindhupalchok" />
     </div>
   );
 };
