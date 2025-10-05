@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
-const GOOGLE_API_KEY = 'AIzaSyDEEX90sCkRapzVxoSajUrwhm2B3Ff9dhQ';
+const GOOGLE_API_KEY = 'AIzaSyApPB1HHiRu1zt_QuVOAQvnu2efCBZ8-Rk';
 
 const Chatbot = ({ district, onOpenChange }) => {
     const [genAI, setGenAI] = useState(null);
