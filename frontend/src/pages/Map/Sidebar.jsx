@@ -2,7 +2,7 @@ import "./Sidebar.css"
 import { MapPin } from "lucide-react";
 
 
-function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
+function Sidebar({ setHeatProp, setColdProp, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
 
 	return (
 		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full pt-5 px-6 sticky top-0 sidebar-root">
