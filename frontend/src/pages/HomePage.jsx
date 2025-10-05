@@ -13,13 +13,13 @@ const HomePage = () => {
               </span>
 
               <h1 className="text-6xl lg:text-7xl font-serif font-bold text-brunswick leading-tight tracking-tight">
-                Experience
+                Design Smarter, Greener Cities
                 <span className="bg-gradient-to-r from-sage to-brunswick bg-clip-text text-transparent"> Innovation</span>
               </h1>
 
               <p className="text-xl font-sans text-brunswick/80 leading-relaxed">
-                Dive into an interactive world where technology meets creativity. 
-                Explore, learn, and engage with cutting-edge experiences.
+                An interactive platform empowering urban planners with real-time,
+                data-driven insights for sustainable and resilient development.
               </p>
 
               <div className="flex flex-wrap gap-4">
