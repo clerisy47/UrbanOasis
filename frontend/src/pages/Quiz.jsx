@@ -130,7 +130,7 @@ const MCQTrivia = () => {
                         ? 'bg-[#A3B18A] text-white' 
                         : 'bg-[#904E55] text-white'
                       : isCurrent 
-                      ? 'bg-brunswick text-white scale-110' 
+                      ? 'bg-[#FFD700] text-brunswick scale-110 ring-4 ring-[#FFD700]/30' 
                       : 'bg-gray-300 text-gray-600'
                   }`}
                 >
@@ -146,10 +146,6 @@ const MCQTrivia = () => {
       <div className="relative">
         <div 
           className="bg-floral/40 backdrop-blur-lg rounded-3xl p-8 border border-sage/20 shadow-xl"
-          style={{
-            transform: `translateX(${currentQuestion * 100 / questions.length}%)`,
-            transition: 'transform 0.5s ease-in-out'
-          }}
         >
           <div className="flex justify-between items-center mb-6">
             <span className="text-brunswick/80 font-medium">
