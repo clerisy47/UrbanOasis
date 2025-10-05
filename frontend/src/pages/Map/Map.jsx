@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 
 function Map() {
 	let [country, setCountry] = useState("Nepal");
-	let [zoom, setZoom] = useState("8");
+	let [zoom, setZoom] = useState("7");
 	let [osm, setOSM] = useState(true);
 	let [markers, setMarkers] = useState(true);
 	let [heatmap, setHeatmap] = useState(true);

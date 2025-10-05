@@ -1,14 +1,5 @@
 import "./Sidebar.css"
 
-
-const handleApply = () => {
-	// TODO: apply current filters/settings to map
-}
-
-const handleReset = () => {
-	// TODO: reset selections
-}
-
 function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
 
 	return (
@@ -100,15 +91,6 @@ function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZon
 							</select>
 						</div>
 					</div>
-				</div>
-
-				<div className="flex gap-3">
-					<button onClick={handleApply} className="flex-1 bg-sage text-floral px-4 py-2 rounded-lg font-medium hover:opacity-95">Apply</button>
-					<button onClick={handleReset} className="flex-1 bg-transparent border border-sage/20 text-brunswick px-4 py-2 rounded-lg">Reset</button>
-				</div>
-
-				<div className="text-xs text-brunswick/60 pt-4">
-					<strong>Data:</strong> Dummy markers only. Wire real data using map callbacks.
 				</div>
 			</div>
 		</aside>
