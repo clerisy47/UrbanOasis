@@ -5,19 +5,23 @@ import Container from './Container'
 import Sidebar from "./Sidebar";
 
 function Map() {
-	let [country, setCountry] = useState("Nepal");
 	let [zoom, setZoom] = useState("7");
 	let [osm, setOSM] = useState(true);
-	let [markers, setMarkers] = useState(true);
+	let [markers, setMarkers] = useState(false);
 	let [heatmap, setHeatmap] = useState(true);
+	let [heatProp, setHeatProp] = useState("health_facilities");
+	let [color, setColor] = useState("hot");
 	let [zones, setZones] = useState(true);
 	// let [pollution, setPollution] = useState(true);
+	console.log(heatProp, color);
 
 	return (
 
 		<div className="flex h-screen pt-16">
-			<Sidebar setCountry={setCountry} zoom={zoom} setZoom={setZoom} markers={markers} setMarkers={setMarkers} zones={zones} setZones={setZones} osm={osm} setOSM={setOSM} heatmap={heatmap} setHeatmap={setHeatmap}></Sidebar>
-			<Container country={country} zoom={zoom} markers={markers} zones={zones} osm={osm} heatmap={heatmap}/>
+			<Sidebar {...{
+				setHeatProp, setColor, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap
+			}}></Sidebar>
+			<Container {...{ heatProp, color, zoom, markers, zones, osm, heatmap }} />
 		</div>
 	)
 }

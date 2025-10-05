@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
-const GOOGLE_API_KEY = 'AIzaSyDsjajmITbYInEsIsE3ene88nH7HfyKEdQ';
+const GOOGLE_API_KEY = 'AIzaSyDEEX90sCkRapzVxoSajUrwhm2B3Ff9dhQ';
 
 const Chatbot = ({ district }) => {
     const [genAI, setGenAI] = useState(null);
@@ -126,8 +127,14 @@ Question: ${input}
                                 <div className={`max-w-[80%] p-3 rounded-xl ${msg.isUser
                                     ? 'bg-brunswick text-floral rounded-tr-none'
                                     : 'bg-sage/20 text-brunswick rounded-tl-none'
-                                    }`}>
-                                    {msg.text}
+                                    } prose prose-sm`}>
+                                    {msg.isUser ? (
+                                        msg.text
+                                    ) : (
+                                        <ReactMarkdown>
+                                            {msg.text}
+                                        </ReactMarkdown>
+                                    )}
                                 </div>
                             </div>
                         ))}
