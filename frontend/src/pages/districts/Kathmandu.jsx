@@ -1,5 +1,5 @@
 import React from 'react';
-import Chatbot from '../../components/chat/Chatbot';
+import KathmanduChatbot from '../../components/chat/KathmanduChatbot';
 
 const Kathmandu = () => {
   return (
@@ -64,7 +64,7 @@ const Kathmandu = () => {
           </div>
         </div>
       </div>
-      <Chatbot />
+      <KathmanduChatbot />
     </div>
   );
 };

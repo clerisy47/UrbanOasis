@@ -1,5 +1,5 @@
 import React from 'react';
-import Chatbot from '../../components/chat/Chatbot';
+import SindhupalchokChatbot from '../../components/chat/SindhupalchokChatbot';
 
 const Sindhupalchok = () => {
   return (
@@ -65,7 +65,7 @@ const Sindhupalchok = () => {
           </div>
         </div>
       </div>
-      <Chatbot />
+      <SindhupalchokChatbot />
     </div>
   );
 };
