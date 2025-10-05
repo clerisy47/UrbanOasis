@@ -5,6 +5,7 @@ import municipalities from "../../assets/municipalities.json";
 import districts from "../../assets/districts.json";
 import districtsData from "../../assets/districtData.json";
 import municipalityData from "../../assets/municipalityData.json";
+import dumpingData from "../../assets/DumpingLocation.json";
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { showKailali, showKathmandu, showSindhupalchowk } from './Popup'
@@ -140,7 +141,12 @@ function Container({ heatmapProp, zoom, osm, markers, zones, heatmap, health, ed
 					/>
 				}
 
-				{markers && [
+				{markers && dumpingData.map((d) => (
+					<Marker position={[d.latitude, d.longitude]} icon={redIcon}>
+					</Marker>
+				))}
+
+				{/* {markers && [
 					<Marker position={[28, 84]} icon={redIcon}>
 						<Popup>
 							Dumping Site
@@ -197,7 +203,7 @@ function Container({ heatmapProp, zoom, osm, markers, zones, heatmap, health, ed
 						</Popup>
 					</Marker>,
 				]
-				}
+				} */}
 
 				{/* {health && heatData && heatData.filter(item => item.type === 'air_pollution').map((d) => (
 					<Marker position={[d.latitude, d.longitude]} icon={blueIcon}>
