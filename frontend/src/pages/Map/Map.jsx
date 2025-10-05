@@ -10,7 +10,7 @@ function Map() {
 	let [markers, setMarkers] = useState(false);
 	let [heatmap, setHeatmap] = useState(true);
 	let [heatProp, setHeatProp] = useState("education_health");
-	let [coldProp, setColdProp] = useState("housing");
+	let [coldProp, setColdProp] = useState("none");
 	let [zones, setZones] = useState(false);
 	// let [pollution, setPollution] = useState(true);
 	console.log(heatProp, coldProp);

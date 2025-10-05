@@ -5,7 +5,7 @@ import { MapPin } from "lucide-react";
 function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
 
 	return (
-		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full px-6 sticky top-0 sidebar-root">
+		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full pt-5 px-6 sticky top-0 sidebar-root">
 			<div className="space-y-6 overflow-y-auto h-full px-1">
 				<div className="flex items-center justify-between">
 					<h2 className="text-2xl font-serif font-bold text-brunswick">Map Layers</h2>
@@ -19,6 +19,7 @@ function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMark
 					<label className="block text-sm text-brunswick/80 mb-2">Select heat property</label>
 					<select onChange={(e) => setHeatProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
 						<option value="education_health">Education and Health Facilities</option>
+						<option value="none">None</option>
 						<option value="air_pollution">Air Pollution</option>
 						<option value="health_facilities">Health Facilities</option>
 						<option value="education_facilities">Education Facilities</option>
@@ -30,6 +31,7 @@ function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMark
 				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
 					<label className="block text-sm text-brunswick/80 mb-2">Select cold property</label>
 					<select onChange={(e) => setColdProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
+						<option value="None">None</option>
 						<option value="housing">Housing</option>
 						<option value="education_health">Education and Health Facilities</option>
 						<option value="air_pollution">Air Pollution</option>
@@ -95,25 +97,6 @@ function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMark
 					<p className="text-xs text-brunswick/60 mt-3">Tip: select multiple layers to compare data on the map.</p>
 				</div>
 
-				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
-					<h3 className="text-lg font-medium text-brunswick mb-3">Filters</h3>
-					<div className="space-y-3">
-						<div>
-							<label className="text-sm text-brunswick/80">Zoom</label>
-							<input onChange={(e) => setRadius(e.target.value)} type="range" min="1" max="50" defaultValue={radius} className="w-full mt-2" />
-						</div>
-
-						<div>
-							<label className="text-sm text-brunswick/80">Minimum rating</label>
-							<select className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
-								<option value="0">Any</option>
-								<option value="3">3+</option>
-								<option value="4">4+</option>
-								<option value="4.5">4.5+</option>
-							</select>
-						</div>
-					</div>
-				</div>
 			</div>
 		</aside>
 	)

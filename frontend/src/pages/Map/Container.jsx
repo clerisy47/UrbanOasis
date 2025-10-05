@@ -138,11 +138,11 @@ function Container({ heatProp, coldProp, zoom, osm, markers, zones, heatmap, }) 
 					<GeoJSON data={showDistricts ? districts : municipalities} style={setStyle} onEachFeature={setLayer} />
 				}
 
-				{heatmap &&
+				{heatmap && heatProp!="none" && 
 					<Heatmap heatData={heatData} heatmapProp={heatProp} hotorcold="hot" />
 				}
 
-				{heatmap &&
+				{heatmap && coldProp!="none" &&
 					<Heatmap heatData={heatData} heatmapProp={coldProp} hotorcold="cold" />
 				}
 

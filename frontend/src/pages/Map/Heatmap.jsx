@@ -8,10 +8,10 @@ const maxValue = {
 	"health_facilities": 1,
 	"education_facilities": 1,
 	"education_health": 1,
-	"housing": 5,
+	"housing": 2,
 }
 
-const r = 10;
+const r = 20;
 const radius = {
 	"air_pollution": r,
 	"health_facilities": r,
@@ -22,8 +22,8 @@ const radius = {
 
 function Heatmap({ heatData, heatmapProp, hotorcold }) {
 	const getGradient = useCallback((temp) => {
-		if (temp === "hot") return {0.4: 'red', 0.65: 'red', 1: 'red'}
-		else return {0.4: 'blue', 0.65: 'blue', 1: 'blue'}
+		if (temp === "hot") return {0.4: 'blue', 0.65: 'lime', 1: 'red'};
+		else return {0.4: '#00ff00', 0.65: '#0000ff', 1: '#800080'}
 	}, [])
 	let data;
 	console.log(heatmapProp)
@@ -42,7 +42,7 @@ function Heatmap({ heatData, heatmapProp, hotorcold }) {
 	const map = useMap();
 	useEffect(() => {
 		const layer = L.heatLayer(data.map(item => [item.latitude, item.longitude, item.value]),
-			{ radius: radius[heatmapProp], minOpacity: 0.4, opactiy: 1, max: maxValue[heatmapProp], gradient: getGradient(hotorcold) }
+			{ radius: radius[heatmapProp], minOpacity: 0.2, max: maxValue[heatmapProp], gradient: getGradient(hotorcold) }
 		);
 
 		layer.addTo(map);
