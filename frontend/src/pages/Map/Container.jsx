@@ -85,7 +85,13 @@ function createPopup(title, contentHTML) {
         <td>Use clean energy, segregate waste, conserve water, plant trees, use public transport.</td>
         <td>Expand public transport, increase green space, upgrade waste systems, improve drainage, enforce building codes, promote rooftop solar.</td>
       </tr>
-    </table>`;
+    </table>
+    <div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #ddd;">
+      <button onclick="window.location.href='/districts/kathmandu'"
+              style="background: linear-gradient(135deg, #10B981, #059669); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        📊 Full Analysis
+      </button>
+    </div>`;
     createPopup("Kathmandu District Sustainability", content);
   }
   
@@ -128,7 +134,13 @@ function createPopup(title, contentHTML) {
         <td>Use improved stoves, manage waste, join community forestry, conserve water, prepare emergency kits.</td>
         <td>Expand piped water, build compost units, stabilize slopes, improve drainage, expand electricity, support literacy, integrate disaster-risk maps.</td>
       </tr>
-    </table>`;
+    </table>
+    <div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #ddd;">
+      <button onclick="window.location.href='/districts/sindhupalchok'"
+              style="background: linear-gradient(135deg, #10B981, #059669); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        📊 Full Analysis
+      </button>
+    </div>`;
     createPopup("Sindhupalchowk District Sustainability", content);
   }
   
@@ -171,7 +183,13 @@ function createPopup(title, contentHTML) {
         <td>Reduce open burning, use masks, maintain drains, adopt water-saving farming, raise homes, plant trees.</td>
         <td>Expand flood control, promote resilient crops, improve waste and water systems, plan green urban growth, integrate heat mitigation.</td>
       </tr>
-    </table>`;
+    </table>
+    <div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #ddd;">
+      <button onclick="window.location.href='/districts/kailali'"
+              style="background: linear-gradient(135deg, #10B981, #059669); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        📊 Full Analysis
+      </button>
+    </div>`;
     createPopup("Kailali District Sustainability", content);
   }
 
