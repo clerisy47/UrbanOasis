@@ -2,7 +2,7 @@ import "./Sidebar.css"
 import { MapPin } from "lucide-react";
 
 
-function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap, health, setHealth, education, setEducation }) {
+function Sidebar({ setHeatProp, setColdProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
 
 	return (
 		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full px-6 sticky top-0 sidebar-root">
@@ -16,13 +16,27 @@ function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones
 				</div>
 
 				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
-					<label className="block text-sm text-brunswick/80 mb-2">Select heatmap property</label>
-					<select onChange={(e) => setHeatmapProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
+					<label className="block text-sm text-brunswick/80 mb-2">Select heat property</label>
+					<select onChange={(e) => setHeatProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
+						<option value="education_health">Education and Health Facilities</option>
+						<option value="air_pollution">Air Pollution</option>
+						<option value="health_facilities">Health Facilities</option>
+						<option value="education_facilities">Education Facilities</option>
+						<option value="housing">Housing</option>
+					</select>
+					<p className="text-xs text-brunswick/60 mt-2">Choose a property to display as heat in the heatmap</p>
+				</div>
+
+				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
+					<label className="block text-sm text-brunswick/80 mb-2">Select cold property</label>
+					<select onChange={(e) => setColdProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
+						<option value="housing">Housing</option>
+						<option value="education_health">Education and Health Facilities</option>
 						<option value="air_pollution">Air Pollution</option>
 						<option value="health_facilities">Health Facilities</option>
 						<option value="education_facilities">Education Facilities</option>
 					</select>
-					<p className="text-xs text-brunswick/60 mt-2">Choose a property to display in the heatmap</p>
+					<p className="text-xs text-brunswick/60 mt-2">Choose a property to display as cold in the heatmap</p>
 				</div>
 
 				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
@@ -55,26 +69,6 @@ function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones
 								Dumping Sites
 							</span>
 						</label>
-
-						{/* <label key="education" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={education}
-									onChange={(e) => setEducation(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Educational Facilities</span>
-							</label>
-
-							<label key="health" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={health}
-									onChange={(e) => setHealth(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Health Facilities</span>
-							</label> */}
 
 						<label key="heatmap" className="flex items-center space-x-3 text-brunswick">
 							<input
