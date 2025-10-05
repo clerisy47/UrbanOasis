@@ -1,10 +1,12 @@
 import "./Sidebar.css"
+import { MapPin } from "lucide-react";
 
-function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap }) {
+
+function Sidebar({ setHeatmapProp, radius, setRadius, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap, health, setHealth, education, setEducation }) {
 
 	return (
 		<aside className="w-96 bg-floral/60 backdrop-blur-sm border-r border-sage/20 h-full px-6 sticky top-0 sidebar-root">
-			<div className="space-y-6 overflow-y-auto h-full pt-5 px-1">
+			<div className="space-y-6 overflow-y-auto h-full px-1">
 				<div className="flex items-center justify-between">
 					<h2 className="text-2xl font-serif font-bold text-brunswick">Map Layers</h2>
 					<button className="text-brunswick/70 hover:text-brunswick" aria-label="close-sidebar">
@@ -14,15 +16,13 @@ function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZon
 				</div>
 
 				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
-					<label className="block text-sm text-brunswick/80 mb-2">Select country</label>
-					<select onChange={(e) => setCountry(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
-						<option value="nepal">Nepal</option>
-						<option value="india">India</option>
-						<option value="bangladesh">Bangladesh</option>
-						<option value="pakistan">Pakistan</option>
-						<option value="sri-lanka">Sri Lanka</option>
+					<label className="block text-sm text-brunswick/80 mb-2">Select heatmap property</label>
+					<select onChange={(e) => setHeatmapProp(e.target.value)} className="w-full bg-transparent border border-sage/20 rounded-lg px-3 py-2 text-brunswick">
+						<option value="air_pollution">Air Pollution</option>
+						<option value="health_facilities">Health Facilities</option>
+						<option value="education_facilities">Education Facilities</option>
 					</select>
-					<p className="text-xs text-brunswick/60 mt-2">Choose a country to center the map (lat/lng will be set by map logic).</p>
+					<p className="text-xs text-brunswick/60 mt-2">Choose a property to display in the heatmap</p>
 				</div>
 
 				<div className="bg-white/5 p-4 rounded-2xl border border-sage/10">
@@ -32,42 +32,70 @@ function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZon
 					</div>
 
 					<div className="space-y-3">
-							<label key="osm" className="flex items-center space-x-3 text-brunswick">
+
+						<label key="osm" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={osm}
+								onChange={(e) => setOSM(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">OSM</span>
+						</label>
+
+						<label key="markers" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={markers}
+								onChange={(e) => setMarkers(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm flex items-center gap-1">
+								<MapPin className="w-4 h-4 text-red-500" />
+								Dumping Sites
+							</span>
+						</label>
+
+						{/* <label key="education" className="flex items-center space-x-3 text-brunswick">
 								<input
 									type="checkbox"
-									checked={osm}
-									onChange={(e) => setOSM(e.target.checked)}
+									checked={education}
+									onChange={(e) => setEducation(e.target.checked)}
 									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
 								/>
-								<span className="text-sm">OSM</span>
+								<span className="text-sm">Educational Facilities</span>
 							</label>
-							<label key="markers" className="flex items-center space-x-3 text-brunswick">
+
+							<label key="health" className="flex items-center space-x-3 text-brunswick">
 								<input
 									type="checkbox"
-									checked={markers}
-									onChange={(e) => setMarkers(e.target.checked)}
+									checked={health}
+									onChange={(e) => setHealth(e.target.checked)}
 									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
 								/>
-								<span className="text-sm">Markers</span>
-							</label>
-							<label key="heatmap" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={heatmap}
-									onChange={(e) => setHeatmap(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Heatmap</span>
-							</label>
-							<label key="zones" className="flex items-center space-x-3 text-brunswick">
-								<input
-									type="checkbox"
-									checked={zones}
-									onChange={(e) => setZones(e.target.checked)}
-									className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
-								/>
-								<span className="text-sm">Zones</span>
-							</label>
+								<span className="text-sm">Health Facilities</span>
+							</label> */}
+
+						<label key="heatmap" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={heatmap}
+								onChange={(e) => setHeatmap(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">Heatmap</span>
+						</label>
+
+						<label key="zones" className="flex items-center space-x-3 text-brunswick">
+							<input
+								type="checkbox"
+								checked={zones}
+								onChange={(e) => setZones(e.target.checked)}
+								className="w-4 h-4 text-sage bg-white/5 border-sage/20 rounded"
+							/>
+							<span className="text-sm">Zones</span>
+						</label>
+
 					</div>
 
 					<p className="text-xs text-brunswick/60 mt-3">Tip: select multiple layers to compare data on the map.</p>
@@ -78,7 +106,7 @@ function Sidebar({ setCountry, zoom, setZoom, markers, setMarkers, zones, setZon
 					<div className="space-y-3">
 						<div>
 							<label className="text-sm text-brunswick/80">Zoom</label>
-							<input onChange={(e) => setZoom(e.target.value)} type="range" min="1" max="20" defaultValue={zoom} className="w-full mt-2" />
+							<input onChange={(e) => setRadius(e.target.value)} type="range" min="1" max="50" defaultValue={radius} className="w-full mt-2" />
 						</div>
 
 						<div>

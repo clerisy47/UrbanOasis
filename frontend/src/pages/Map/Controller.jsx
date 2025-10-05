@@ -1,8 +1,8 @@
 import { useMap } from 'react-leaflet'
 import * as L from "leaflet";
 
-function Controller({ country, zoom }) {
-	console.log(country, zoom)
+function Controller({ zoom }) {
+	console.log(zoom)
 
 	// let map = useMap();
 
