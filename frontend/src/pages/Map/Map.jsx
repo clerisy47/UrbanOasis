@@ -9,19 +9,19 @@ function Map() {
 	let [osm, setOSM] = useState(true);
 	let [markers, setMarkers] = useState(false);
 	let [heatmap, setHeatmap] = useState(true);
-	let [heatProp, setHeatProp] = useState("education_health");
-	let [coldProp, setColdProp] = useState("none");
-	let [zones, setZones] = useState(false);
+	let [heatProp, setHeatProp] = useState("health_facilities");
+	let [color, setColor] = useState("hot");
+	let [zones, setZones] = useState(true);
 	// let [pollution, setPollution] = useState(true);
-	console.log(heatProp, coldProp);
+	console.log(heatProp, color);
 
 	return (
 
 		<div className="flex h-screen pt-16">
 			<Sidebar {...{
-				setHeatProp, setColdProp, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap
+				setHeatProp, setColor, zoom, setZoom, markers, setMarkers, zones, setZones, osm, setOSM, heatmap, setHeatmap
 			}}></Sidebar>
-			<Container {...{ heatProp, coldProp, zoom, markers, zones, osm, heatmap }} />
+			<Container {...{ heatProp, color, zoom, markers, zones, osm, heatmap }} />
 		</div>
 	)
 }
