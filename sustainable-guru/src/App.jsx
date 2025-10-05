@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+const GOOGLE_API_KEY = AIzaSyDsjajmITbYInEsIsE3ene88nH7HfyKEdQ;
 
 export function useGeminiRAG() {
   const [context, setContext] = useState('');
@@ -32,7 +32,7 @@ export function useGeminiRAG() {
   const fetchContextFromBackend = async (backendUrl, params = {}) => {
     setFetchingContext(true);
     setError('');
-    
+
     try {
       const response = await fetch(backendUrl, {
         method: 'POST',
@@ -47,10 +47,10 @@ export function useGeminiRAG() {
       }
 
       const data = await response.json();
-      
+
       // Assuming backend returns { context: "..." } or { data: "..." }
       const contextText = data.context || data.data || data.content || '';
-      
+
       if (contextText.trim()) {
         setContext(contextText);
         setContextSet(true);
@@ -163,7 +163,7 @@ Instructions:
     error,
     apiKeySet,
     fetchingContext,
-    
+
     // Methods
     setContext,
     handleSetContext,
@@ -212,11 +212,11 @@ export default function GeminiRAGChatbot() {
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
       <h1>Gemini RAG Chatbot - Backend Context</h1>
-      
+
       {!contextSet && apiKeySet && (
         <div style={{ marginBottom: '20px' }}>
           <h2>Load Context</h2>
-          
+
           {/* Option 1: Fetch from Backend */}
           <div style={{ marginBottom: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '5px' }}>
             <h3>From Backend</h3>
@@ -227,8 +227,8 @@ export default function GeminiRAGChatbot() {
               style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
               placeholder="Backend URL (e.g., http://localhost:3000/api/context)"
             />
-            <button 
-              onClick={handleFetchFromBackend} 
+            <button
+              onClick={handleFetchFromBackend}
               disabled={fetchingContext}
               style={{ padding: '10px 20px', cursor: 'pointer' }}
             >
@@ -246,7 +246,7 @@ export default function GeminiRAGChatbot() {
               style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
               placeholder="Or paste context manually for testing..."
             />
-            <button 
+            <button
               onClick={() => handleSetContext(context)}
               style={{ padding: '10px 20px', cursor: 'pointer' }}
             >
@@ -263,17 +263,17 @@ export default function GeminiRAGChatbot() {
           </div>
 
           <h2>Chat</h2>
-          <div style={{ 
-            border: '1px solid #ccc', 
-            padding: '15px', 
-            height: '400px', 
+          <div style={{
+            border: '1px solid #ccc',
+            padding: '15px',
+            height: '400px',
             overflowY: 'auto',
             marginBottom: '10px',
             backgroundColor: '#fafafa',
             borderRadius: '5px'
           }}>
             {messages.map((msg, idx) => (
-              <div key={idx} style={{ 
+              <div key={idx} style={{
                 marginBottom: '15px',
                 textAlign: msg.role === 'user' ? 'right' : 'left'
               }}>
@@ -299,12 +299,12 @@ export default function GeminiRAGChatbot() {
           </div>
 
           {error && (
-            <div style={{ 
-              color: 'white', 
-              backgroundColor: '#dc3545', 
-              padding: '10px', 
-              borderRadius: '5px', 
-              marginBottom: '10px' 
+            <div style={{
+              color: 'white',
+              backgroundColor: '#dc3545',
+              padding: '10px',
+              borderRadius: '5px',
+              marginBottom: '10px'
             }}>
               {error}
             </div>
@@ -316,20 +316,20 @@ export default function GeminiRAGChatbot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && !loading && handleSubmit()}
-              style={{ 
-                flex: 1, 
-                padding: '10px', 
-                borderRadius: '5px', 
-                border: '1px solid #ccc' 
+              style={{
+                flex: 1,
+                padding: '10px',
+                borderRadius: '5px',
+                border: '1px solid #ccc'
               }}
               placeholder="Ask a question about sustainability..."
               disabled={loading}
             />
-            <button 
-              onClick={handleSubmit} 
+            <button
+              onClick={handleSubmit}
               disabled={loading || !input.trim()}
-              style={{ 
-                padding: '10px 20px', 
+              style={{
+                padding: '10px 20px',
                 cursor: loading ? 'not-allowed' : 'pointer',
                 backgroundColor: loading ? '#ccc' : '#007bff',
                 color: 'white',
@@ -339,10 +339,10 @@ export default function GeminiRAGChatbot() {
             >
               Send
             </button>
-            <button 
+            <button
               onClick={handleClearContext}
-              style={{ 
-                padding: '10px 20px', 
+              style={{
+                padding: '10px 20px',
                 cursor: 'pointer',
                 backgroundColor: '#dc3545',
                 color: 'white',

@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 
-const Chatbot = () => {
+const Chatbot = ({ district }) => {
+  const welcomeMessages = {
+    kathmandu: "Welcome to Kathmandu's sustainability assistant! I can help you understand the urban challenges and opportunities in the capital city. Ask me about air quality, waste management, public transportation, or any other sustainability aspects of Kathmandu.",
+    sindhupalchok: "Welcome to Sindhupalchok's sustainability assistant! I can help you understand the rural development challenges and opportunities in this mountainous district. Ask me about landslide risks, agriculture, forest conservation, or any other sustainability aspects of Sindhupalchok.",
+    kailali: "Welcome to Kailali's sustainability assistant! I can help you understand the development challenges and opportunities in this Terai district. Ask me about flood management, agricultural practices, biodiversity conservation, or any other sustainability aspects of Kailali."
+  };
+
   const [messages, setMessages] = useState([{
-    text: "Hello! I'm your sustainability assistant. Ask me anything about urban development and sustainability in Nepal's districts!",
+    text: welcomeMessages[district.toLowerCase()] || "Welcome! Ask me anything about sustainability in this district.",
     isUser: false
   }]);
   const [input, setInput] = useState('');
@@ -21,7 +27,7 @@ const Chatbot = () => {
     // Simulate bot response
     setTimeout(() => {
       setMessages([...newMessages, {
-        text: "I'm analyzing your query about sustainable urban development. This feature will be connected to a real AI backend soon!",
+        text: `I'm analyzing your query about ${district}'s development. This feature will be connected to a real AI backend soon!`,
         isUser: false
       }]);
     }, 1000);
@@ -54,7 +60,7 @@ const Chatbot = () => {
       {isOpen && (
         <div className="fixed bottom-20 right-4 w-96 h-[500px] bg-floral rounded-2xl shadow-xl border border-sage/20 flex flex-col">
           <div className="bg-brunswick text-floral p-4 rounded-t-2xl flex justify-between items-center">
-            <h3 className="font-serif font-semibold">Sustainability Assistant</h3>
+            <h3 className="font-serif font-semibold">{district} Assistant</h3>
             <button 
               onClick={() => setIsOpen(false)}
               className="text-floral/80 hover:text-floral"
@@ -83,7 +89,7 @@ const Chatbot = () => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about sustainability..."
+                placeholder={`Ask about ${district}...`}
                 className="flex-1 px-4 py-2 rounded-xl border border-sage/20 focus:outline-none focus:border-brunswick"
               />
               <button 

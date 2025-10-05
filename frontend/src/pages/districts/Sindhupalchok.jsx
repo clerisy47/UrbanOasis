@@ -1,5 +1,5 @@
 import React from 'react';
-import SindhupalchokChatbot from '../../components/chat/SindhupalchokChatbot';
+import Chatbot from '../../components/chat/Chatbot';
 
 const Sindhupalchok = () => {
   return (
@@ -62,10 +62,10 @@ const Sindhupalchok = () => {
               <li>• Develop eco-tourism infrastructure to diversify income sources</li>
               <li>• Strengthen healthcare infrastructure with mobile medical units</li>
             </ul>
-          </div>
+                    </div>
         </div>
       </div>
-      <SindhupalchokChatbot />
+      <Chatbot district="Sindhupalchok" />
     </div>
   );
 };
