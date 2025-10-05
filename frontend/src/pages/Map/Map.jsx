@@ -1,36 +1,24 @@
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
-import Heatmap from "./Heatmap";
-import municipalities from "../../assets/municipalities.json";
-import districts from "../../assets/districts.json";
-
-let showDistricts = 1;
+import { useState } from 'react'
+import Container from './Container'
+import Sidebar from "./Sidebar";
 
 function Map() {
-	const setColor = ({ properties }) => {
-		console.log(properties["NAME"]);
-		return { weight: 1 };
-	};
+	let [country, setCountry] = useState("Nepal");
+	let [zoom, setZoom] = useState("7");
+	let [osm, setOSM] = useState(true);
+	let [markers, setMarkers] = useState(true);
+	let [heatmap, setHeatmap] = useState(true);
+	let [zones, setZones] = useState(true);
+	// let [pollution, setPollution] = useState(true);
 
 	return (
-		<MapContainer 
-			center={[28.574, 80.807]} 
-			zoom={8}
-			style={{ height: "100vh", width: "100%" }}
-		>
-			<TileLayer
-				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-			/>
-			<GeoJSON data={showDistricts ? districts : municipalities} style={setColor} />
-			<Marker position={[28.574, 80.807]}>
-				<Popup>
-					A pretty CSS3 popup. <br /> Easily customizable.
-				</Popup>
-			</Marker>
-			<Heatmap />
-		</MapContainer>
+
+		<div className="flex h-screen pt-16">
+			<Sidebar setCountry={setCountry} zoom={zoom} setZoom={setZoom} markers={markers} setMarkers={setMarkers} zones={zones} setZones={setZones} osm={osm} setOSM={setOSM} heatmap={heatmap} setHeatmap={setHeatmap}></Sidebar>
+			<Container country={country} zoom={zoom} markers={markers} zones={zones} osm={osm} heatmap={heatmap}/>
+		</div>
 	)
 }
 
