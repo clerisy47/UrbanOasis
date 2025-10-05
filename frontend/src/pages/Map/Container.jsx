@@ -8,6 +8,7 @@ import dumpingData from "../../assets/DumpingLocation.json";
 import { useState, useEffect } from 'react'
 import { showKailali, showKathmandu, showSindhupalchowk } from './Popup'
 import L from 'leaflet'
+import MapAlert from '../../components/ui/MapAlert'
 // import { useNavigate } from 'react-router-dom'
 
 let showDistricts = 1;
@@ -53,7 +54,6 @@ function Container({ heatProp, color, zoom, osm, markers, zones, heatmap, }) {
 			})
 			.then((data) => {
 				setHeatData(data);
-				alert("Click on the blue markers to get more info and 'Full Analysis' to visit specific pages")
 			})
 			.catch((error) => console.error("Error loading mock data:", error));
 	}, []);
@@ -129,7 +129,8 @@ function Container({ heatProp, color, zoom, osm, markers, zones, heatmap, }) {
 	}
 
 	return (
-		<div className="h-full flex-2 p-10">
+		<div className="h-full flex-2 p-10 relative">
+			<MapAlert />
 			<MapContainer
 				center={center}
 				className="h-full"
