@@ -1,44 +1,22 @@
-import { useEffect } from 'react';
-import { useMap } from 'react-leaflet';
-import 'leaflet.heat';
-import * as L from "leaflet";
+import { useMap } from 'react-leaflet'
+import { useState, useEffect } from 'react'
+import 'leaflet.heat'
+import L from "leaflet";
 
-function Heatmap() {
-    const map = useMap();
+function Heatmap({ data }) {
 
-    useEffect(() => {
-        // Wait for the map to be ready
-        if (!map) return;
+	console.log(data);
+	console.log("Heatmap Rendered");
+	const map = useMap();
+  useEffect(() => {
+		const layer = 	L.heatLayer(data, { radius: 50, minOpacity: 0.2, max: 1000, gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } });
 
-        // Create the heat layer
-        const heat = L.heatLayer([
-            [28.5, 80.8, 0.3], // lat, lng, intensity
-            [29.0, 83.9, 1],
-            [29.3, 80.8, 3],
-            [29.5, 81.1, 4],
-            [27.6, 86.3, 100],
-            [28.6, 82.3, 8],
-        ], { 
-            radius: 25,
-            blur: 15,
-            maxZoom: 10,
-            minOpacity: 0.4
-        });
+    layer.addTo(map);
 
-        // Add the layer to the map
-        map.on('layeradd', () => {
-            heat.addTo(map);
-        });
+    return () => layer.remove();
+  }, [map, data]);
 
-        // Cleanup function
-        return () => {
-            if (map && heat) {
-                map.removeLayer(heat);
-            }
-        };
-    }, [map]); // Only re-run if map changes
-
-    return null;
+	return null
 }
 
-export default Heatmap;
+export default Heatmap
